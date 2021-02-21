@@ -115,7 +115,7 @@ def runTan():
     finalTime = time.time()
     print("Timpul de calcul :", (finalTime - startTime))
 
-    return format(avgErr, ".12f"),(finalTime - startTime)
+    return format(avgErr, ".12f"), (finalTime - startTime)
 
 
 if __name__ == '__main__':
