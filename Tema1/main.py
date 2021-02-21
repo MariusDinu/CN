@@ -11,8 +11,8 @@ def minimnumber():
                 # inseram in array u
                 numbers.insert(m, u)
             # afisam fiecare u care respecta conditiile
-            print(u)
-    print(numbers)
+            #print(u)
+    #print(numbers)
     # sortam array-ul ca sa avem pe prima pozitie cel mai mic numar
     numbers.sort()
     # afisam numarul cel mai mic din array
@@ -32,17 +32,24 @@ def neasociativeOp(u):
         print("Produsul este neasociativ")
         print(a, b, c)
 
-def exProdusNeasociativ():
-    a=1.999*2.3
-    b=2.000
-    c=2.000
+def exProdusNeasociativ(u):
+
+    a=2.2
+    b=u/10
+    c=u/10
     if (a * b) * c != a * (b * c):
         print("Produsul este neasociativ")
-        print(a, b, c)
+        print ("Primul produs:",(a*b)*c)
+        print("Al doilea produs:",a * (b * c))
+
 
 if __name__ == '__main__':
-    #firstPrecision = minimnumber()
-    #neasociativeOp(firstPrecision)
-    exProdusNeasociativ()
+    #Ex1
+    firstPrecision = minimnumber()
+    #Ex2 a.
+    neasociativeOp(firstPrecision)
+    #Ex2 b.
+    exProdusNeasociativ(firstPrecision)
+    #Ex3
 
 
