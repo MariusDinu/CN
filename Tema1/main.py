@@ -1,3 +1,9 @@
+def init(top, gui, *args, **kwargs):
+    global w, top_level, root
+    w = gui
+    top_level = top
+    root = top
+
 def minimnumber():
     # am creat un array ca sa salvam toate numerele u care respecta conditiile
     numbers = []
@@ -31,6 +37,7 @@ def neasociativeOp(u):
     if (a * b) * c != a * (b * c):
         print("Produsul este neasociativ")
         print(a, b, c)
+    return a,b,c
 
 def exProdusNeasociativ(u):
 
@@ -41,6 +48,7 @@ def exProdusNeasociativ(u):
         print("Produsul este neasociativ")
         print ("Primul produs:",(a*b)*c)
         print("Al doilea produs:",a * (b * c))
+    return a,b,c
 
 
 if __name__ == '__main__':
@@ -51,5 +59,3 @@ if __name__ == '__main__':
     #Ex2 b.
     exProdusNeasociativ(firstPrecision)
     #Ex3
-
-
