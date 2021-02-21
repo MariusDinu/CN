@@ -11,8 +11,8 @@ def minimnumber():
                 # inseram in array u
                 numbers.insert(m, u)
             # afisam fiecare u care respecta conditiile
-            #print(u)
-    #print(numbers)
+            print(u)
+    print(numbers)
     # sortam array-ul ca sa avem pe prima pozitie cel mai mic numar
     numbers.sort()
     # afisam numarul cel mai mic din array
