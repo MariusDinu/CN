@@ -2,6 +2,7 @@ import math
 
 import numpy
 
+
 eps = 1e-16
 tliber = [2.25, 9.0625, 24]
 D = numpy.zeros((3, 3))
@@ -92,7 +93,12 @@ def norma(A, n, x, b):
         m < 10 ** (-9),
         "=" * 100
     ))
-    return m
+    p = ("Norma:{} < 10 ** (-8) = {}\n{}\n".format(
+        m,
+        m < 10 ** (-9),
+        "=" * 100
+    ))
+    return p
 
 
 def inversa(A, n, det):

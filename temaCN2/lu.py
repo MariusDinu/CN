@@ -3,9 +3,6 @@ import numpy
 epsilon = 1e-16
 
 
-__author__ = "Mihaila Alexandra Ioana"
-__version__ = "1.1"
-__status__ = "Dev"
 
 
 def sigma_u(A, i, p):
@@ -29,6 +26,36 @@ def sigma_l(A, i, p):
 
     return sigma_sum
 
+
+def LU_factorization(A, n):
+    A_init = A
+
+    for p in range(1, n + 1):
+        # elements of p column for U: u(ip) = 1...p-1
+        # NB: u(pp) = 1
+        for i in range(1, p):
+            a_ip = A_init[i - 1, p - 1]
+            l_ii = A[i - 1, i - 1]
+            if not numpy.abs(l_ii) > epsilon:
+                print("[x] Matrix A has a null minor. We can't solve the system.")
+                return False
+
+            u_ip = (a_ip - sigma_u(A, i, p)) / l_ii
+            A[i - 1, p - 1] = u_ip
+
+        # elements of p line for L: l(pi) = 1...p
+        for i in range(1, p + 1):
+            a_pi = A_init[p - 1, i - 1]
+            l_pi = a_pi - sigma_l(A, i, p)
+            A[p - 1, i - 1] = l_pi
+
+    print("a) printam descompunerea: L si U")
+    print_L(A, n)
+    print()
+    print_U(A, n)
+    print("{}\n".format("=" * 100))
+
+    return A
 
 def LU_factorization(A, n):
     A_init = A
@@ -160,6 +187,12 @@ def check_solution(A_init, b, x, n):
         m < 10 ** (-8),
         "=" * 100
     ))
+    p = ("{} < 10 ** (-8) = {}\n{}\n".format(
+        m,
+        m < 10 ** (-8),
+        "=" * 100
+    ))
+    return p
 
 
 def bonus(A_init, n, b, x):
