@@ -177,11 +177,13 @@ def check_solution(A_init, b, x, n):
         y = numpy.append(y, y_i)
 
     z = numpy.subtract(y, b)
+
     euclidean_norm = 0
     for i in range(1, n + 1):
         euclidean_norm += z[i - 1] ** 2
 
     m = numpy.sqrt(euclidean_norm)
+
     print("{} < 10 ** (-8) = {}\n{}\n".format(
         m,
         m < 10 ** (-8),

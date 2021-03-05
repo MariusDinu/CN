@@ -52,7 +52,7 @@ def subst(A, n, b):
     for i in range(0, n):
         # calculam suma necesara in formula
         suma3 = 0
-        for j in range(0, i - 1):
+        for j in range(0,i+1):
             suma3 += C[i, j] * y[j]
         y[i] = (tliber[i] - suma3) / C[i, i]
 
@@ -60,13 +60,13 @@ def subst(A, n, b):
     for i in reversed(range(0, n)):
         # calculam suma necesara in formula
         suma4 = 0
-        for j in range(i + 1, n):
+        for j in range(i, n):
             suma4 += C[j, i] * x[j]
 
         x[i] = (y[i] - suma4) / C[i, i]
 
-    for i in range(0, 3):
-        x[i] = x[i] / 2
+    #for i in range(0, 3):
+       # x[i] = x[i]
     # x=[ 2.05349794, -3.34567901, 2.55555556]
     print("substitutiei directe si inverse : ")
     print(x)
@@ -79,13 +79,13 @@ def norma(A, n, x, b):
     for i in range(0, n):
         y_i = 0
         for j in range(0, n):
-            y_i += B[i - 1, j - 1] * x[j - 1]
+            y_i += A[i,j] * x[j]
         y = numpy.append(y, y_i)
-    print(y)
+
     z = numpy.subtract(y, b)
     euclidean_norm = 0
     for i in range(0, n):
-        euclidean_norm += z[i - 1] ** 2
+        euclidean_norm += z[i] ** 2
 
     m = numpy.sqrt(euclidean_norm)
     print("Norma:{} < 10 ** (-8) = {}\n{}\n".format(
