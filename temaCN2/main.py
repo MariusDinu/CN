@@ -64,9 +64,9 @@ def citireRandom():
     x = numpy.array([])
     n = len(A_init)
 def main():
-    #citireTastatura()
+    citireTastatura()
     #citireRandom()
-    citireFisier()
+   # citireFisier()
 
 
 

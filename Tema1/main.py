@@ -1,7 +1,7 @@
-#Dinu Marius 3A5
-#Nassar Mahmoud 3A5
-#Tema 1
-#Calcule Numerice
+# Dinu Marius 3A5
+# Nassar Mahmoud 3A5
+# Tema 1
+# Calcule Numerice
 
 
 def init(top, gui, *args, **kwargs):
@@ -62,7 +62,8 @@ def exProdusNeasociativ(u):
         print("Al doilea produs:", a * (b * c))
     return a, b, c
 
-
+mic = 0.0000000000001
+eps = 0.0000001
 def method2Tan(number):
     c1 = 0.33333333333333333
     c2 = 0.133333333333333333
@@ -77,6 +78,74 @@ def method2Tan(number):
     polinom = number + c1 * x1 + c2 * x2 + c3 * x3 + c4 * x4
     return polinom
 
+def method1Tan(number):
+    b = 1
+    a = number
+    fAnterior = 0
+    if fAnterior == 0:
+        fAnterior = mic
+    CAnterior = fAnterior
+    DAnterior = 0
+    j = 1
+
+    while True:
+        if j > 1:
+            a = (number * number) * (-1)
+        D = b + a * DAnterior
+        if D == 0:
+            D = mic
+        C = b + a / CAnterior
+        if C == 0:
+            C = mic
+        D = 1 / D
+        delta = C * D
+        f = delta * fAnterior
+        j += 1
+        b += 2
+        fAnterior = f
+        CAnterior = C
+        DAnterior = D
+        if abs(delta - 1) < eps:
+            break
+    return f
+def runTan2():
+
+
+    print("Method 1: Fractii continue")
+    # preluam valoare pi
+    pi = math.pi
+    # salvam timpul de start
+    startTime = time.time()
+    sumError1 = 0
+
+    for i in range(0, 10000):
+        # luam variabile random uniform din intervalul nostru
+        value = random.uniform(-pi / 2, pi / 2)
+
+        if -pi / 4 < value < pi / 4:
+            myTan1 = method1Tan(value)
+            pyTan1 = math.tan(value)
+
+        if pi / 4 < value < pi / 2:
+            myTan1 = 1 / (method1Tan((pi / 2) - value))
+            pyTan1 = 1 / (math.tan((pi / 2) - value))
+
+        if -pi / 2 < value < -pi / 4:
+            myTan1 = 1 / (method1Tan(pi - ((pi / 2) - value)))
+            pyTan1 = 1 / (math.tan(pi - ((pi / 2) - value)))
+
+        sumError1 = sumError1 + abs(pyTan1 - myTan1)
+        print("[", i + 1, "]", "Pentru x = ", value, ", Eroare medie =", abs(pyTan1 - myTan1))
+
+    avgErr1 = sumError1 / 10000
+    print("Formula eroare medie: (|tan(x)−my tan(x)|) ")
+    print("Eroarea medie de calcul:", format(avgErr1, ".12f"))
+
+    finalTime = time.time()
+    print("Timpul de calcul :", (finalTime - startTime))
+
+    return format(avgErr1, ".12f"), (finalTime - startTime)
+
 
 def runTan():
     print("Method 2: Polinoms")
@@ -86,11 +155,11 @@ def runTan():
     startTime = time.time()
     sumError = 0
 
-    #avel cele 10000 de variabile din for
+    # avel cele 10000 de variabile din for
     for i in range(0, 10000):
         myTan = 0
         pyTan = 0
-        #luam variabile random uniform din intervalul nostru
+        # luam variabile random uniform din intervalul nostru
         value = random.uniform(-pi / 2, pi / 2)
 
         if -pi / 4 < value < pi / 4:
@@ -104,7 +173,7 @@ def runTan():
         if -pi / 2 < value < -pi / 4:
             myTan = 1 / (method2Tan(pi - ((pi / 2) - value)))
             pyTan = 1 / (math.tan(pi - ((pi / 2) - value)))
-        #calculam suma de la eroarea medie
+        # calculam suma de la eroarea medie
         sumError = sumError + abs(pyTan - myTan)
         print("[", i + 1, "]", "Pentru x = ", value, ", Eroare medie =", abs(pyTan - myTan))
 
@@ -119,7 +188,6 @@ def runTan():
 
 
 if __name__ == '__main__':
-
     # Ex1
     firstPrecision = minimnumber()
 
@@ -131,4 +199,5 @@ if __name__ == '__main__':
     # Ex3 method1: Continuous Fractions
 
     # Ex3 method2: Polinoms
-    runTan()
+    # runTan()
+    runTan2()

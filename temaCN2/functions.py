@@ -17,7 +17,6 @@ def descLLT(A, n):
             suma1 += B[p, i] * B[p, i]
 
         B[p,p] = math.sqrt(tliber[p] - suma1)
-
         for i in range(p + 1, n):
 
             suma2 = 0
